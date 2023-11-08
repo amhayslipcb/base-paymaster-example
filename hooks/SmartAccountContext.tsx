@@ -65,12 +65,9 @@ export const SmartAccountProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  // Get a list of all of the wallets (EOAs) the user has connected to your site
   const { wallets } = useWallets();
-  // Find the embedded wallet by finding the entry in the list with a `walletClientType` of 'privy'
-  const embeddedWallet = wallets.find(
-    (wallet) => wallet.walletClientType === "privy"
-  );
+
+  const wallet = wallets[0];
 
   // States to store the smart account and its status
   const [smartAccountReady, setSmartAccountReady] = useState(false);
@@ -155,8 +152,8 @@ export const SmartAccountProvider = ({
       setSmartAccountReady(true);
     };
 
-    if (embeddedWallet) createSmartWallet(embeddedWallet);
-  }, [embeddedWallet?.address]);
+    if (wallet) createSmartWallet(wallet);
+  }, [wallet?.address]);
 
   const sendSponsoredUserOperation = async (
     transactionRequest: RpcTransactionRequest

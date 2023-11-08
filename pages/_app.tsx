@@ -50,14 +50,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       <PrivyProvider
         appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID || ""}
         config={{
-          loginMethods: ["email", "google"],
+          loginMethods: ["wallet"],
           appearance: {
             theme: "light",
             accentColor: "#676FFF",
-          },
-          embeddedWallets: {
-            createOnLogin: "users-without-wallets",
-            noPromptOnSignature: true,
+            showWalletLoginFirst: true,
           },
           defaultChain: baseGoerli,
         }}
